@@ -16,14 +16,14 @@
           "answer": "Hyper Text Markup Language"
         },
         {
-          "question": "Which of the following is the correct structure for an HTML document?",
+          "question": "Which of the following is the correct structure for an HTML5 document?",
           "options": [
-            "<html><head></head><body></body></html>",
+            "<!DOCTYPE html><html><head></head><body></body></html>",
             "<head><html></html><body></body></head>",
             "<body><head></head><html></html></body>",
             "<html><body></body><head></head></html>"
           ],
-          "answer": "<html><head></head><body></body></html>"
+          "answer": "<!DOCTYPE html><html><head></head><body></body></html>"
         },
         {
           "question": "Which HTML element is used to define the title of a document?",
@@ -51,9 +51,9 @@
           "answer": "<img>"
         },
         {
-          "question": "What attribute is used to provide the path of an image in the <img> tag?",
-          "options": ["link", "src", "href", "url"],
-          "answer": "src"
+          "question": "What attribute is used to provide an alternative text for an image if it cannot be displayed?",
+          "options": ["title", "alt", "src", "desc"],
+          "answer": "alt"
         },
         {
           "question": "Which HTML tag is used to create an unordered list?",
@@ -64,21 +64,16 @@
           "question": "What does the <br> tag do?",
           "options": [
             "It breaks the text into two sections.",
-            "It creates a bold text.",
+            "It creates bold text.",
             "It inserts a line break.",
             "It adds a new row in a table."
           ],
           "answer": "It inserts a line break."
         },
         {
-          "question": "In HTML, what does the `fieldset` tag do?",
-          "options": [
-            "It is used to group related data in a form.",
-            "It sets the field to a fixed size.",
-            "It automatically validates the fields within a form.",
-            "It hides the fields in a form."
-          ],
-          "answer": "It is used to group related data in a form."
+          "question": "In HTML5, which semantic tag should be used to define navigation links?",
+          "options": ["<nav>", "<navigation>", "<menu>", "<links>"],
+          "answer": "<nav>"
         }
       ]
     },
@@ -98,64 +93,54 @@
           "answer": "Cascading Style Sheets"
         },
         {
-          "question": "Which HTML attribute is used to define inline styles?",
-          "options": ["styles", "style", "class", "font-style"],
-          "answer": "style"
-        },
-        {
-          "question": "How do you insert a comment in a CSS file?",
-          "options": [
-            "// this is a comment //",
-            "/* this is a comment */",
-            "-- this is a comment --",
-            "<!-- this is a comment -->"
-          ],
-          "answer": "/* this is a comment */"
-        },
-        {
-          "question": "Which property is used to change the background color of an element?",
-          "options": ["color", "bgcolor", "background-color", "background"],
+          "question": "Which CSS property is used to change the background color of an element?",
+          "options": ["color", "background-color", "bgcolor", "canvas-color"],
           "answer": "background-color"
         },
         {
-          "question": "How do you apply a style to all <p> elements?",
-          "options": ["p { }", ".p { }", "#p { }", "all.p { }"],
-          "answer": "p { }"
+          "question": "How do you select an element with id 'header' in CSS?",
+          "options": [".header", "#header", "*header", "header"],
+          "answer": "#header"
         },
         {
-          "question": "Which property is used to change the font of an element?",
-          "options": ["font-style", "text-style", "font-family", "typeface"],
-          "answer": "font-family"
+          "question": "Which CSS layout model allows easy alignment of items in one dimension?",
+          "options": ["Grid", "Flexbox", "Float", "Positioning"],
+          "answer": "Flexbox"
         },
         {
-          "question": "How do you make each word in a text start with a capital letter?",
-          "options": [
-            "text-transform: capitalize",
-            "text-transform: uppercase",
-            "text-style: capital",
-            "font-transform: capitalize"
-          ],
-          "answer": "text-transform: capitalize"
-        },
-        {
-          "question": "How do you select an element with the class name 'header'?",
-          "options": [".header", "#header", "header", "*header"],
-          "answer": ".header"
-        },
-        {
-          "question": "What is the default value of the 'position' property?",
-          "options": ["relative", "fixed", "absolute", "static"],
+          "question": "What is the default value of the position property in CSS?",
+          "options": ["relative", "absolute", "static", "fixed"],
           "answer": "static"
         },
         {
-          "question": "What is the purpose of the z-index property in CSS?",
+          "question": "Which property is used to change the font of an element?",
+          "options": ["font-style", "font-weight", "font-family", "font-type"],
+          "answer": "font-family"
+        },
+        {
+          "question": "What CSS box-sizing value includes padding and border in the element's total width and height?",
+          "options": ["content-box", "border-box", "padding-box", "inherit"],
+          "answer": "border-box"
+        },
+        {
+          "question": "Which pseudo-class is used to define the style of an element when a user hovers over it?",
+          "options": [":focus", ":active", ":hover", ":visited"],
+          "answer": ":hover"
+        },
+        {
+          "question": "How do you apply a CSS style only for screen widths of 768px or smaller?",
           "options": [
-            "To count the number of elements",
-            "To set the magnification level of an element",
-            "To specify the stack order of an element",
-            "To create a zoom effect"
+            "@media screen and (max-width: 768px)",
+            "@media (min-width: 768px)",
+            "@screen (width <= 768px)",
+            "@device (max-size: 768px)"
           ],
-          "answer": "To specify the stack order of an element"
+          "answer": "@media screen and (max-width: 768px)"
+        },
+        {
+          "question": "What CSS property controls the z-axis stacking order of overlapping elements?",
+          "options": ["z-index", "stack-order", "layer-index", "elevation"],
+          "answer": "z-index"
         }
       ]
     },
@@ -165,94 +150,409 @@
       "icon": "./assets/icon-javascript.svg",
       "questions": [
         {
-          "question": "Which syntax is correct to output 'Hello World' in an alert box?",
+          "question": "Which keyword is used to declare a block-scoped variable that cannot be reassigned?",
+          "options": ["var", "let", "const", "static"],
+          "answer": "const"
+        },
+        {
+          "question": "What is the output of `typeof NaN` in JavaScript?",
+          "options": ["'number'", "'NaN'", "'undefined'", "'object'"],
+          "answer": "'number'"
+        },
+        {
+          "question": "Which method converts a JSON string into a JavaScript object?",
+          "options": ["JSON.stringify()", "JSON.parse()", "JSON.toObject()", "JSON.convert()"],
+          "answer": "JSON.parse()"
+        },
+        {
+          "question": "What will `console.log(0.1 + 0.2 === 0.3)` print in JavaScript?",
+          "options": ["true", "false", "TypeError", "undefined"],
+          "answer": "false"
+        },
+        {
+          "question": "Which array method creates a new array populated with the results of calling a provided function on every element?",
+          "options": ["forEach()", "filter()", "map()", "reduce()"],
+          "answer": "map()"
+        },
+        {
+          "question": "What handles asynchronous operations using `.then()` and `.catch()` in modern JavaScript?",
+          "options": ["Callbacks", "Promises", "Generators", "Iterators"],
+          "answer": "Promises"
+        },
+        {
+          "question": "What does the `===` operator check in JavaScript?",
           "options": [
-            "alertBox('Hello World');",
-            "msg('Hello World');",
-            "alert('Hello World');",
-            "msgBox('Hello World');"
+            "Value equality with type coercion",
+            "Strict equality (both value and type match)",
+            "Memory address reference only",
+            "Variable assignment"
           ],
-          "answer": "alert('Hello World');"
+          "answer": "Strict equality (both value and type match)"
         },
         {
-          "question": "How do you call a function named 'myFunction'?",
+          "question": "What is closure in JavaScript?",
           "options": [
-            "call function myFunction()",
-            "call myFunction()",
-            "myFunction()",
-            "execute myFunction()"
+            "A function combined with references to its surrounding state (lexical environment)",
+            "A method to close browser tabs",
+            "A private variable declaration syntax",
+            "A syntax error in arrow functions"
           ],
-          "answer": "myFunction()"
+          "answer": "A function combined with references to its surrounding state (lexical environment)"
         },
         {
-          "question": "How to write an IF statement in JavaScript?",
-          "options": ["if i = 5 then", "if (i == 5)", "if i == 5", "if i = 5"],
-          "answer": "if (i == 5)"
+          "question": "Which ES6 feature allows extracting values from arrays or properties from objects into distinct variables?",
+          "options": ["Rest syntax", "Spread operator", "Destructuring assignment", "Template literals"],
+          "answer": "Destructuring assignment"
         },
         {
-          "question": "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
+          "question": "What is the purpose of the `async/await` syntax?",
           "options": [
-            "if (i <> 5)",
-            "if i =! 5 then",
-            "if (i != 5)",
-            "if i not = 5"
+            "To run JavaScript on multiple CPU threads simultaneously",
+            "To write asynchronous code that looks and behaves like synchronous code",
+            "To prevent memory leaks in DOM events",
+            "To automatically compile JavaScript to WebAssembly"
           ],
-          "answer": "if (i != 5)"
-        },
+          "answer": "To write asynchronous code that looks and behaves like synchronous code"
+        }
+      ]
+    },
+    {
+      "title": "TypeScript",
+      "color": "#E6F2FF",
+      "icon": "./assets/icon-typescript.svg",
+      "questions": [
         {
-          "question": "How does a FOR loop start?",
+          "question": "What is TypeScript?",
           "options": [
-            "for (i = 0; i <= 5)",
-            "for i = 1 to 5",
-            "for (i <= 5; i++)",
-            "for (i = 0; i <= 5; i++)"
+            "A replacement for HTML and CSS",
+            "A typed superset of JavaScript that compiles to plain JavaScript",
+            "A database query language",
+            "A backend framework for Node.js"
           ],
-          "answer": "for (i = 0; i <= 5; i++)"
+          "answer": "A typed superset of JavaScript that compiles to plain JavaScript"
         },
         {
-          "question": "How can you add a single-line comment in JavaScript?",
+          "question": "Which type represents a value that can be anything, bypassing compile-time type checking?",
+          "options": ["unknown", "never", "any", "void"],
+          "answer": "any"
+        },
+        {
+          "question": "What keyword is used to define custom object type structures in TypeScript?",
+          "options": ["interface", "schema", "struct", "contract"],
+          "answer": "interface"
+        },
+        {
+          "question": "What is the difference between `unknown` and `any` in TypeScript?",
           "options": [
-            "'This is a single-line comment",
-            "//This is a single-line comment",
-            "<!--This is a single-line comment-->",
-            "/* This is a single-line comment */"
+            "`unknown` is type-safe because you must perform type checking before operating on it",
+            "`any` is safer than `unknown`",
+            "There is no difference between them",
+            "`unknown` only accepts strings"
           ],
-          "answer": "//This is a single-line comment"
+          "answer": "`unknown` is type-safe because you must perform type checking before operating on it"
         },
         {
-          "question": "What is the correct way to write a JavaScript array?",
+          "question": "Which utility type constructs a type with all properties of T set to optional?",
+          "options": ["Required<T>", "Partial<T>", "Readonly<T>", "Record<K, T>"],
+          "answer": "Partial<T>"
+        },
+        {
+          "question": "How do you define a type that can be either a `string` or a `number`?",
+          "options": ["string & number", "string | number", "string || number", "Union<string, number>"],
+          "answer": "string | number"
+        },
+        {
+          "question": "What is a Generic in TypeScript?",
           "options": [
-            "var colors = (1:'red', 2:'green', 3:'blue')",
-            "var colors = ['red', 'green', 'blue']",
-            "var colors = 'red', 'green', 'blue'",
-            "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')"
+            "A way to create reusable components/functions that work over a variety of types rather than a single one",
+            "A default variable value",
+            "An internal compiler plugin",
+            "A global scope definition"
           ],
-          "answer": "var colors = ['red', 'green', 'blue']"
+          "answer": "A way to create reusable components/functions that work over a variety of types rather than a single one"
         },
         {
-          "question": "How do you find the number with the highest value of x and y?",
+          "question": "Which keyword is used to assert a specific type to the TypeScript compiler?",
+          "options": ["is", "as", "typeof", "instanceof"],
+          "answer": "as"
+        },
+        {
+          "question": "What return type indicates that a function never returns a value (e.g., throws an error or infinite loop)?",
+          "options": ["void", "null", "never", "undefined"],
+          "answer": "never"
+        },
+        {
+          "question": "Which utility type extracts keys from type T that match type K?",
+          "options": ["Pick<T, K>", "Omit<T, K>", "Extract<T, U>", "Exclude<T, U>"],
+          "answer": "Pick<T, K>"
+        }
+      ]
+    },
+    {
+      "title": "ReactJS",
+      "color": "#E0F7FA",
+      "icon": "./assets/icon-reactjs.svg",
+      "questions": [
+        {
+          "question": "What is the Virtual DOM in React?",
           "options": [
-            "Math.ceil(x, y)",
-            "top(x, y)",
-            "Math.max(x, y)",
-            "Math.highest(x, y)"
+            "A lightweight in-memory representation of the real DOM",
+            "A browser extension for debugging",
+            "A server-side database engine",
+            "A CSS framework for styling"
           ],
-          "answer": "Math.max(x, y)"
+          "answer": "A lightweight in-memory representation of the real DOM"
         },
         {
-          "question": "Which operator is used to assign a value to a variable?",
-          "options": ["-", "*", "=", "x"],
-          "answer": "="
+          "question": "Which React Hook is used to manage local state inside a functional component?",
+          "options": ["useEffect", "useContext", "useState", "useReducer"],
+          "answer": "useState"
         },
         {
-          "question": "What is the correct way to write a JavaScript object?",
+          "question": "Which Hook should be used for side effects such as data fetching or DOM subscriptions?",
+          "options": ["useMemo", "useCallback", "useEffect", "useRef"],
+          "answer": "useEffect"
+        },
+        {
+          "question": "What is the purpose of the `key` prop when rendering lists in React?",
           "options": [
-            "var person = {firstName: 'John', lastName: 'Doe'};",
-            "var person = {firstName = 'John', lastName = 'Doe'};",
-            "var person = (firstName: 'John', lastName: 'Doe');",
-            "var person = (firstName = 'John', lastName = 'Doe');"
+            "To style individual list items",
+            "To help React identify which items have changed, been added, or removed for efficient re-rendering",
+            "To set unique CSS IDs",
+            "To enable drag-and-drop features"
           ],
-          "answer": "var person = {firstName: 'John', lastName: 'Doe'};"
+          "answer": "To help React identify which items have changed, been added, or removed for efficient re-rendering"
+        },
+        {
+          "question": "What Hook memoizes a calculated value to avoid expensive calculations on every render?",
+          "options": ["useCallback", "useMemo", "useRef", "useTransition"],
+          "answer": "useMemo"
+        },
+        {
+          "question": "How do you pass data down from a parent component to a child component in React?",
+          "options": ["State", "Props", "Context", "Reducers"],
+          "answer": "Props"
+        },
+        {
+          "question": "What Hook provides access to mutable ref objects that persist across re-renders without triggering a re-render?",
+          "options": ["useState", "useRef", "useId", "useLayoutEffect"],
+          "answer": "useRef"
+        },
+        {
+          "question": "Which Hook memoizes a callback function instance between renders?",
+          "options": ["useCallback", "useMemo", "useEffect", "useImperativeHandle"],
+          "answer": "useCallback"
+        },
+        {
+          "question": "What React feature allows passing data through the component tree without manually passing props at every level?",
+          "options": ["Redux", "React Context", "Higher-Order Components", "Portals"],
+          "answer": "React Context"
+        },
+        {
+          "question": "What component lifecycle phase does `useEffect` with an empty dependency array `[]` represent?",
+          "options": ["ComponentDidUpdate", "ComponentDidMount", "ComponentWillUnmount", "ComponentDidCatch"],
+          "answer": "ComponentDidMount"
+        }
+      ]
+    },
+    {
+      "title": "NextJS",
+      "color": "#F0F0F0",
+      "icon": "./assets/icon-nextjs.svg",
+      "questions": [
+        {
+          "question": "What router model is introduced in Next.js 13+ that relies on the `app` directory?",
+          "options": ["Pages Router", "App Router", "Memory Router", "Express Router"],
+          "answer": "App Router"
+        },
+        {
+          "question": "By default, what type of components are created inside the `app` directory in Next.js?",
+          "options": ["Client Components", "React Server Components (RSC)", "Class Components", "Redux Containers"],
+          "answer": "React Server Components (RSC)"
+        },
+        {
+          "question": "Which directive must be added at the top of a file to mark it as a Client Component in Next.js App Router?",
+          "options": ["'use client'", "'use browser'", "'use react'", "'client side'"],
+          "answer": "'use client'"
+        },
+        {
+          "question": "Which special Next.js file is used to define dynamic API endpoint routes in the App Router?",
+          "options": ["api.js", "endpoint.jsx", "route.js", "controller.js"],
+          "answer": "route.js"
+        },
+        {
+          "question": "Which built-in component in Next.js provides automatic image optimization and lazy loading?",
+          "options": ["<Img />", "<Image />", "<Picture />", "<OptimizedImage />"],
+          "answer": "<Image />"
+        },
+        {
+          "question": "What special file is used to define a shared layout UI across multiple pages in Next.js App Router?",
+          "options": ["template.jsx", "layout.jsx", "page.jsx", "master.jsx"],
+          "answer": "layout.jsx"
+        },
+        {
+          "question": "What strategy pre-renders pages at build time (Static Site Generation)?",
+          "options": ["SSG", "SSR", "CSR", "ISR"],
+          "answer": "SSG"
+        },
+        {
+          "question": "What feature in Next.js allows updating static pages in the background without rebuilding the entire site?",
+          "options": ["Incremental Static Regeneration (ISR)", "Hot Module Replacement (HMR)", "Dynamic Server Rendering", "Client Caching"],
+          "answer": "Incremental Static Regeneration (ISR)"
+        },
+        {
+          "question": "Which special file defines custom 404 UI in Next.js App Router?",
+          "options": ["404.jsx", "not-found.jsx", "error.jsx", "missing.jsx"],
+          "answer": "not-found.jsx"
+        },
+        {
+          "question": "How do you navigate client-side between pages in Next.js?",
+          "options": ["<a href=...>", "<Link href=...>", "<Navigate to=...>", "<RouterLink to=...>"],
+          "answer": "<Link href=...>"
+        }
+      ]
+    },
+    {
+      "title": "NodeJS",
+      "color": "#E8F5E9",
+      "icon": "./assets/icon-nodejs.svg",
+      "questions": [
+        {
+          "question": "What is Node.js?",
+          "options": [
+            "A JavaScript frontend framework",
+            "An open-source, cross-platform JavaScript runtime environment built on Chrome's V8 engine",
+            "A relational database management system",
+            "A browser plugin for running C++ code"
+          ],
+          "answer": "An open-source, cross-platform JavaScript runtime environment built on Chrome's V8 engine"
+        },
+        {
+          "question": "How does Node.js handle asynchronous I/O operations efficiently on a single thread?",
+          "options": [
+            "Multi-threading CPU cores",
+            "Event Loop and Non-blocking I/O",
+            "Synchronous queue processing",
+            "Child process isolation"
+          ],
+          "answer": "Event Loop and Non-blocking I/O"
+        },
+        {
+          "question": "Which core module in Node.js is used to work with file system operations?",
+          "options": ["path", "fs", "http", "stream"],
+          "answer": "fs"
+        },
+        {
+          "question": "What default module system is used when importing files with `require()` in Node.js?",
+          "options": ["CommonJS (CJS)", "ES Modules (ESM)", "AMD", "SystemJS"],
+          "answer": "CommonJS (CJS)"
+        },
+        {
+          "question": "What web framework for Node.js is famous for providing minimal and flexible HTTP server features?",
+          "options": ["Express.js", "Django", "Spring Boot", "Laravel"],
+          "answer": "Express.js"
+        },
+        {
+          "question": "What global object in Node.js provides environment variables (e.g. `process.env.PORT`)?",
+          "options": ["global", "window", "process", "system"],
+          "answer": "process"
+        },
+        {
+          "question": "Which Node.js core module is used for handling and manipulating file paths?",
+          "options": ["url", "path", "os", "file"],
+          "answer": "path"
+        },
+        {
+          "question": "What is Middleware in an Express.js application?",
+          "options": [
+            "Functions that have access to request (req), response (res), and the next middleware function in the stack",
+            "A database ORM tool",
+            "A frontend templating engine",
+            "A hardware component"
+          ],
+          "answer": "Functions that have access to request (req), response (res), and the next middleware function in the stack"
+        },
+        {
+          "question": "Which module system uses `import` and `export` statements in modern Node.js?",
+          "options": ["CommonJS", "ES Modules (ESM)", "RequireJS", "UMD"],
+          "answer": "ES Modules (ESM)"
+        },
+        {
+          "question": "What built-in Node.js module allows creating HTTP web servers without external packages?",
+          "options": ["http", "net", "url", "express"],
+          "answer": "http"
+        }
+      ]
+    },
+    {
+      "title": "Git & GitHub",
+      "color": "#FDE8E8",
+      "icon": "./assets/icon-git-github.svg",
+      "questions": [
+        {
+          "question": "What is Git?",
+          "options": [
+            "A distributed version control system",
+            "A cloud hosting provider for code",
+            "A programming language",
+            "A database system"
+          ],
+          "answer": "A distributed version control system"
+        },
+        {
+          "question": "Which command initializes a new Git repository in the current directory?",
+          "options": ["git start", "git init", "git new", "git create"],
+          "answer": "git init"
+        },
+        {
+          "question": "Which command stages modified or new files for the next commit?",
+          "options": ["git add .", "git stage", "git push", "git save"],
+          "answer": "git add ."
+        },
+        {
+          "question": "How do you record staged changes into the local repository history with a message?",
+          "options": ["git push -m \"message\"", "git commit -m \"message\"", "git save -m \"message\"", "git checkout -m \"message\""],
+          "answer": "git commit -m \"message\""
+        },
+        {
+          "question": "Which command creates and switches to a new branch named 'feature'?",
+          "options": ["git branch feature", "git checkout -b feature", "git switch feature", "git create feature"],
+          "answer": "git checkout -b feature"
+        },
+        {
+          "question": "What command uploads local commits to a remote repository on GitHub?",
+          "options": ["git pull", "git fetch", "git push", "git clone"],
+          "answer": "git push"
+        },
+        {
+          "question": "What is GitHub?",
+          "options": [
+            "A web-based platform for hosting and collaborating on Git repositories",
+            "The official compiler for Git",
+            "A desktop operating system",
+            "A local terminal editor"
+          ],
+          "answer": "A web-based platform for hosting and collaborating on Git repositories"
+        },
+        {
+          "question": "Which command fetches and integrates changes from a remote branch into your current branch?",
+          "options": ["git fetch", "git pull", "git merge", "git clone"],
+          "answer": "git pull"
+        },
+        {
+          "question": "What is a Pull Request (PR) on GitHub?",
+          "options": [
+            "A proposal to merge changes from one branch into another with code review and discussion",
+            "A request to download files to local disk",
+            "A git command to undo commits",
+            "A mechanism to delete remote branches"
+          ],
+          "answer": "A proposal to merge changes from one branch into another with code review and discussion"
+        },
+        {
+          "question": "What command allows combining the history of a feature branch onto another branch by replaying commits?",
+          "options": ["git merge", "git rebase", "git reset", "git cherry-pick"],
+          "answer": "git rebase"
         }
       ]
     },
@@ -262,94 +562,44 @@
       "icon": "./assets/icon-accessibility.svg",
       "questions": [
         {
-          "question": "What does 'WCAG' stand for?",
+          "question": "What does WCAG stand for?",
           "options": [
             "Web Content Accessibility Guidelines",
-            "Web Compliance Accessibility Guide",
-            "Web Content Accessibility Goals",
-            "Website Compliance and Accessibility Guidelines"
+            "Web Communication Accessibility Group",
+            "World Content Access Guide",
+            "Web Compliance and Assistance Goal"
           ],
           "answer": "Web Content Accessibility Guidelines"
-        },
-        {
-          "question": "Which element is used to provide alternative text for images for screen reader users?",
-          "options": [
-            "<alt>",
-            "<figcaption>",
-            "<description>",
-            "<img alt='description'>"
-          ],
-          "answer": "<img alt='description'>"
         },
         {
           "question": "What does ARIA stand for in web development?",
           "options": [
             "Accessible Rich Internet Applications",
-            "Advanced Responsive Internet Assistance",
-            "Accessible Responsive Internet Applications",
-            "Automated Responsive Internet Actions"
+            "Automated Responsive Interface Architecture",
+            "Advanced Reader Interaction Application",
+            "Applied Rule Integration System"
           ],
           "answer": "Accessible Rich Internet Applications"
         },
         {
-          "question": "Which of the following is not a principle of the WCAG?",
+          "question": "Why is it important to provide `alt` text for images?",
           "options": [
-            "Perceivable",
-            "Dependable",
-            "Operable",
-            "Understandable"
+            "To allow screen readers to describe images to visually impaired users",
+            "To increase image rendering speed",
+            "To make images responsive",
+            "To style images with CSS filters"
           ],
-          "answer": "Dependable"
+          "answer": "To allow screen readers to describe images to visually impaired users"
         },
         {
-          "question": "Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA requirement for normal text?",
-          "options": ["3:1", "4.5:1", "7:1", "2:1"],
-          "answer": "4.5:1"
+          "question": "Which HTML element provides native keyboard accessibility for clickable actions?",
+          "options": ["<div>", "<span>", "<button>", "<p>"],
+          "answer": "<button>"
         },
         {
-          "question": "Which of the following elements is inherently focusable, meaning it can receive focus without a 'tabindex' attribute?",
-          "options": ["<div>", "<span>", "<a href='...'>", "<p>"],
-          "answer": "<a href='...'>"
-        },
-        {
-          "question": "What is the purpose of the 'lang' attribute in an HTML page?",
-          "options": [
-            "To specify the scripting language",
-            "To define the character set",
-            "To indicate the language of the page content",
-            "To declare a language pack"
-          ],
-          "answer": "To indicate the language of the page content"
-        },
-        {
-          "question": "Which guideline ensures that content is accessible by keyboard as well as by mouse?",
-          "options": [
-            "Keyboard Accessible",
-            "Mouse Independence",
-            "Device Independence",
-            "Operable Controls"
-          ],
-          "answer": "Keyboard Accessible"
-        },
-        {
-          "question": "What is the role of 'skip navigation' links in web accessibility?",
-          "options": [
-            "To skip over primary navigation to the main content",
-            "To provide shortcuts to different sections of the website",
-            "To help users skip unwanted sections like advertisements",
-            "To bypass broken links in the navigation"
-          ],
-          "answer": "To skip over primary navigation to the main content"
-        },
-        {
-          "question": "Which of these tools can help in checking the accessibility of a website?",
-          "options": [
-            "W3C Validator",
-            "Google Lighthouse",
-            "CSS Validator",
-            "JavaScript Console"
-          ],
-          "answer": "Google Lighthouse"
+          "question": "What attribute links a `<label>` element directly to an `<input>` element?",
+          "options": ["for (or htmlFor in React)", "target", "id", "name"],
+          "answer": "for (or htmlFor in React)"
         }
       ]
     }
