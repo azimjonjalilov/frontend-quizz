@@ -8,19 +8,37 @@ export function useFetch(url) {
   useEffect(() => {
     const fetchData = async () => {
       setIsPending(true);
+      setError(null);
       try {
         const req = await fetch(url);
-        console.log(req);
         if (!req.ok) {
-          throw new Error(req.statusText);
+          throw new Error(req.statusText || "Fetch failed");
         }
-        const data = await req.json();
-        setData(data);
+        const resData = await req.json();
+        setData(resData);
         setIsPending(false);
       } catch (err) {
-        setError(err.message);
-        console.log(err.message);
-        setIsPending(false);
+        try {
+          const fallbackReq = await fetch("/data/db.json");
+          if (!fallbackReq.ok) {
+            throw new Error("Local data fetch failed");
+          }
+          const localData = await fallbackReq.json();
+          const urlObj = new URL(url, window.location.origin);
+          const titleParam = urlObj.searchParams.get("title");
+          if (titleParam) {
+            const filtered = localData.quizzes.filter(
+              (q) => q.title.toLowerCase() === titleParam.toLowerCase()
+            );
+            setData({ data: filtered });
+          } else {
+            setData({ data: localData.quizzes });
+          }
+          setIsPending(false);
+        } catch (fallbackErr) {
+          setError(err.message);
+          setIsPending(false);
+        }
       }
     };
     fetchData();

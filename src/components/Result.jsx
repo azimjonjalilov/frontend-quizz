@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 function Result({ title, color, icon, correctAnswerCount, questions }) {
+  const iconPath = icon ? icon.replace(/^\./, "") : `/assets/icon-${title.toLowerCase()}.svg`;
+
   return (
     <div className="test-container result-container">
       <div className="home-content">
@@ -13,7 +15,7 @@ function Result({ title, color, icon, correctAnswerCount, questions }) {
         <div className="test-completed-body">
           <div className="menu-item header-logo">
             <figure style={{ backgroundColor: color }}>
-              <img src={`.${icon}`} alt="" />
+              <img src={iconPath} alt="" />
             </figure>
             <span>{title}</span>
           </div>

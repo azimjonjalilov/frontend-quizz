@@ -21,6 +21,7 @@ function MenuLinks() {
       <div className="menu-list">
         {quizzes &&
           quizzes.data.map((item) => {
+            const iconPath = item.icon ? item.icon.replace(/^\./, "") : "";
             return (
               <Link
                 to={`/quiz/${item.title}`}
@@ -28,7 +29,7 @@ function MenuLinks() {
                 className="menu-item header-logo"
               >
                 <figure style={{ backgroundColor: item.color }}>
-                  <img src={item.icon} alt={item.title} />
+                  <img src={iconPath} alt={item.title} />
                 </figure>
                 <span>{item.title}</span>
               </Link>

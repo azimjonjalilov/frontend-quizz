@@ -1,5 +1,5 @@
 // import react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // components
 import Result from "./Result";
@@ -8,7 +8,7 @@ import Result from "./Result";
 import toast from "react-hot-toast";
 
 const Test = ({ questions: { color, icon, questions, title } }) => {
-  const [asnweredQuestions, setAsnweredQuestions] = useState(1);
+  const [answeredQuestions, setAnsweredQuestions] = useState(1);
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -16,7 +16,13 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
   const [statusDisabled, setStatusDisabled] = useState(false);
   const [showNextButton, setShowNextButton] = useState(false);
 
-  console.log(selectedAnswer);
+  useEffect(() => {
+    if (questionIndex === questions.length) {
+      toast.success("Congratulations", {
+        icon: "🎉",
+      });
+    }
+  }, [questionIndex, questions.length]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +32,7 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
     if (selectedAnswer == null) {
       toast.error("Please, select an answer");
     } else {
-      if (selectedAnswer == correctAnswer) {
+      if (selectedAnswer === correctAnswer) {
         setAnswerStatus("correct");
         setCorrectAnswerCount(correctAnswerCount + 1);
       } else {
@@ -39,7 +45,7 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
 
   const handleNextQuestion = () => {
     setQuestionIndex(questionIndex + 1);
-    setAsnweredQuestions(asnweredQuestions + 1);
+    setAnsweredQuestions(answeredQuestions + 1);
     setSelectedAnswer(null);
     setShowNextButton(false);
     setAnswerStatus(null);
@@ -47,9 +53,6 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
   };
 
   if (questionIndex === questions.length) {
-    toast.success("Congratulations", {
-      icon: "🎉",
-    });
     return (
       <Result
         title={title}
@@ -65,7 +68,7 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
     <div className="test-container">
       <div className="test-content">
         <p className="test-description">
-          Question {asnweredQuestions} of {questions.length}
+          Question {answeredQuestions} of {questions.length}
         </p>
         <h2 className="test-title">{questions[questionIndex].question}</h2>
 
@@ -73,7 +76,7 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
           <div
             className="test-proccess"
             style={{
-              width: (asnweredQuestions / questions.length) * 100 + "%",
+              width: (answeredQuestions / questions.length) * 100 + "%",
             }}
           ></div>
         </div>
@@ -86,14 +89,14 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
 
               let className = "";
 
-              if (answerStatus == "correct" && option == selectedAnswer) {
+              if (answerStatus === "correct" && option === selectedAnswer) {
                 className = "correct";
-              } else if (answerStatus == "incorrect") {
-                if (option == selectedAnswer) {
+              } else if (answerStatus === "incorrect") {
+                if (option === selectedAnswer) {
                   className = "incorrect";
                 }
 
-                if (option == questions[questionIndex].answer) {
+                if (option === questions[questionIndex].answer) {
                   className = "correct";
                 }
               }
@@ -104,6 +107,7 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
                     <input
                       type="radio"
                       name="option"
+                      checked={selectedAnswer === option}
                       onChange={() => setSelectedAnswer(option)}
                       disabled={statusDisabled}
                     />
@@ -112,14 +116,14 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
                     {/* icon */}
                     <img
                       className="test-icon-correct"
-                      src="../assets/icon-correct.svg"
+                      src="/assets/icon-correct.svg"
                       alt="icon"
                       width={40}
                       height={40}
                     />
                     <img
                       className="test-icon-incorrect"
-                      src="../assets/icon-incorrect.svg"
+                      src="/assets/icon-incorrect.svg"
                       alt="icon"
                       width={40}
                       height={40}
@@ -133,8 +137,12 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
             <button className="btn test-btn">Submit Question</button>
           )}
           {showNextButton && (
-            <button className="btn test-btn" onClick={handleNextQuestion}>
-              {questions.length == asnweredQuestions
+            <button
+              type="button"
+              className="btn test-btn"
+              onClick={handleNextQuestion}
+            >
+              {questions.length === answeredQuestions
                 ? "Finish"
                 : "Next Question"}
             </button>
