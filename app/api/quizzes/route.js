@@ -1,22 +1,43 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import dbConnect from "@/lib/mongodb";
+import Technology from "@/models/Technology";
+import Theme from "@/models/Theme";
+import Question from "@/models/Question";
 
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const title = searchParams.get("title");
 
-    const filePath = path.join(process.cwd(), "data", "db.json");
-    const fileData = await fs.readFile(filePath, "utf-8");
-    const json = JSON.parse(fileData);
+    await dbConnect();
 
-    let quizzes = json.quizzes || [];
-
+    let query = { isPublished: true };
     if (title) {
-      quizzes = quizzes.filter(
-        (q) => q.title.toLowerCase() === title.toLowerCase()
-      );
+      query.name = { $regex: new RegExp(`^${title}$`, "i") };
+    }
+
+    const technologies = await Technology.find(query).sort({ order: 1 }).lean();
+    let quizzes = [];
+
+    for (let tech of technologies) {
+      const themes = await Theme.find({ technologyId: tech._id }).lean();
+      let mappedQuestions = [];
+      
+      if (themes.length > 0) {
+        const questions = await Question.find({ themeId: themes[0]._id }).sort({ order: 1 }).lean();
+        mappedQuestions = questions.map(q => ({
+          question: q.question,
+          options: q.options,
+          answer: q.options[q.correctAnswer]
+        }));
+      }
+
+      quizzes.push({
+        title: tech.name,
+        icon: tech.icon,
+        color: tech.color,
+        questions: mappedQuestions
+      });
     }
 
     return NextResponse.json({ data: quizzes });
