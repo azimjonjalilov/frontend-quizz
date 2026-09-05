@@ -62,6 +62,9 @@ const Navbar = () => {
           {session ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <span style={{ fontSize: '0.875rem', fontWeight: '500' }}>{session.user.name}</span>
+              {session.user.role === 'admin' && (
+                <Link href="/admin" style={{ fontSize: '0.875rem', color: 'var(--success-border)', fontWeight: 'bold' }}>Admin Panel</Link>
+              )}
               <Link href="/dashboard" style={{ fontSize: '0.875rem', color: 'var(--primary-purple)' }}>Dashboard</Link>
               <button onClick={() => signOut()} style={{ fontSize: '0.875rem', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--error-color)' }}>
                 Logout
