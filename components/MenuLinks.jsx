@@ -1,16 +1,34 @@
 import Link from "next/link";
-import fs from "fs/promises";
-import path from "path";
+import dbConnect from "@/lib/mongodb";
+import Technology from "@/models/Technology";
+import Theme from "@/models/Theme";
+import Question from "@/models/Question";
 
 export default async function MenuLinks() {
   let quizzes = [];
   try {
-    const filePath = path.join(process.cwd(), "data", "db.json");
-    const fileData = await fs.readFile(filePath, "utf-8");
-    const json = JSON.parse(fileData);
-    quizzes = json.quizzes || [];
+    await dbConnect();
+    // Fetch all technologies
+    const technologies = await Technology.find({ isPublished: true }).sort({ order: 1 }).lean();
+    
+    // For each technology, fetch its default theme and question count
+    // (Simulating the old structure for the UI)
+    for (let tech of technologies) {
+      const themes = await Theme.find({ technologyId: tech._id }).lean();
+      let questionCount = 0;
+      if (themes.length > 0) {
+        questionCount = await Question.countDocuments({ themeId: themes[0]._id });
+      }
+      
+      quizzes.push({
+        title: tech.name,
+        icon: tech.icon,
+        color: tech.color,
+        questions: new Array(questionCount).fill({}) // Fake array just for length calculation in the UI
+      });
+    }
   } catch (err) {
-    console.error("Failed to read quizzes data:", err);
+    console.error("Failed to read quizzes data from DB:", err);
   }
 
   return (
