@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import Result from "./Result";
 import toast from "react-hot-toast";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle2, XCircle, ChevronRight, ArrowRight } from "lucide-react";
 
 const Test = ({ questions: { color, icon, questions, title } }) => {
   const [answeredQuestions, setAnsweredQuestions] = useState(1);
@@ -14,15 +17,9 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
   const [showNextButton, setShowNextButton] = useState(false);
 
   useEffect(() => {
-    if (questionIndex === questions.length) {
+    if (questionIndex === questions.length && questions.length > 0) {
       toast.success("Congratulations! Quiz Completed 🎉", {
         duration: 4000,
-        style: {
-          borderRadius: "12px",
-          background: "var(--card-bg)",
-          color: "var(--text-main)",
-          border: "1px solid var(--card-border)",
-        },
       });
     }
   }, [questionIndex, questions.length]);
@@ -31,14 +28,7 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
     e.preventDefault();
 
     if (selectedAnswer == null) {
-      toast.error("Please select an answer to proceed", {
-        style: {
-          borderRadius: "12px",
-          background: "var(--card-bg)",
-          color: "var(--text-main)",
-          border: "1px solid var(--card-border)",
-        },
-      });
+      toast.error("Please select an answer to proceed");
       return;
     }
 
@@ -79,144 +69,108 @@ const Test = ({ questions: { color, icon, questions, title } }) => {
   const progressPercent = Math.round((answeredQuestions / questions.length) * 100);
 
   return (
-    <div className="test-grid">
-      <div className="test-header-meta">
-        <span className="question-badge">
-          Question {answeredQuestions} of {questions.length}
-        </span>
-        <h2 className="question-text">{currentQuestion.question}</h2>
+    <div className="max-w-6xl mx-auto px-4 py-8 md:py-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+        <div className="flex flex-col h-full">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300 font-medium text-sm w-max mb-8">
+            Question {answeredQuestions} of {questions.length}
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white leading-tight mb-8">
+            {currentQuestion.question}
+          </h2>
 
-        <div className="progress-bar-track">
-          <div
-            className="progress-bar-fill"
-            style={{ width: `${progressPercent}%` }}
-          ></div>
+          <div className="mt-auto pt-8">
+            <div className="h-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${progressPercent}%` }}
+              ></div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="test-form-container">
-        <form onSubmit={handleSubmit}>
-          <ul className="options-list">
-            {currentQuestion.options.map((option, index) => {
-              const alphabet = String.fromCharCode(65 + index);
+        <div className="w-full">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-4">
+              {currentQuestion.options.map((option, index) => {
+                const alphabet = String.fromCharCode(65 + index);
+                
+                let isCorrect = false;
+                let isIncorrect = false;
 
-              let statusClass = "";
-
-              if (answerStatus === "correct" && option === selectedAnswer) {
-                statusClass = "correct";
-              } else if (answerStatus === "incorrect") {
-                if (option === selectedAnswer) {
-                  statusClass = "incorrect";
+                if (answerStatus === "correct" && option === selectedAnswer) {
+                  isCorrect = true;
+                } else if (answerStatus === "incorrect") {
+                  if (option === selectedAnswer) isIncorrect = true;
+                  if (option === currentQuestion.answer) isCorrect = true;
                 }
-                if (option === currentQuestion.answer) {
-                  statusClass = "correct";
+
+                const isSelected = selectedAnswer === option;
+
+                let stateClasses = "border-slate-200 dark:border-slate-800 hover:border-violet-600 hover:bg-slate-50 dark:hover:bg-slate-900";
+                let letterClasses = "bg-slate-100 dark:bg-slate-800 text-slate-500 group-hover:bg-violet-100 group-hover:text-violet-600 dark:group-hover:bg-violet-900/50 dark:group-hover:text-violet-400";
+                
+                if (isSelected && !answerStatus) {
+                  stateClasses = "border-violet-600 ring-2 ring-violet-600/20";
+                  letterClasses = "bg-violet-600 text-white";
+                } else if (isCorrect) {
+                  stateClasses = "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20";
+                  letterClasses = "bg-emerald-500 text-white";
+                } else if (isIncorrect) {
+                  stateClasses = "border-rose-500 bg-rose-50 dark:bg-rose-950/20";
+                  letterClasses = "bg-rose-500 text-white";
                 }
-              }
 
-              const isSelected = selectedAnswer === option;
-
-              return (
-                <li key={option}>
+                return (
                   <label
-                    className={`option-card ${
-                      isSelected ? "selected" : ""
-                    } ${statusClass}`}
+                    key={option}
+                    className={`group relative flex items-center p-4 cursor-pointer rounded-xl border-2 transition-all duration-200 ${stateClasses} ${statusDisabled ? 'pointer-events-none' : ''}`}
                   >
-                    <span className="option-letter">{alphabet}</span>
                     <input
                       type="radio"
                       name="option"
+                      className="sr-only"
                       checked={isSelected}
                       onChange={() => setSelectedAnswer(option)}
                       disabled={statusDisabled}
-                      style={{ display: "none" }}
                     />
-                    <span className="option-text">{option}</span>
+                    
+                    <span className={`flex items-center justify-center w-10 h-10 rounded-lg text-lg font-medium mr-4 transition-colors ${letterClasses}`}>
+                      {alphabet}
+                    </span>
+                    
+                    <span className="text-lg text-slate-900 dark:text-slate-100 font-medium flex-1">
+                      {option}
+                    </span>
 
-                    {statusClass === "correct" && (
-                      <div className="status-icon">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--success-color)"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
-                      </div>
+                    {isCorrect && (
+                      <CheckCircle2 className="w-6 h-6 text-emerald-500 ml-4 animate-in zoom-in" />
                     )}
-
-                    {statusClass === "incorrect" && (
-                      <div className="status-icon">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--error-color)"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <line x1="15" y1="9" x2="9" y2="15"></line>
-                          <line x1="9" y1="9" x2="15" y2="15"></line>
-                        </svg>
-                      </div>
+                    {isIncorrect && (
+                      <XCircle className="w-6 h-6 text-rose-500 ml-4 animate-in zoom-in" />
                     )}
                   </label>
-                </li>
-              );
-            })}
-          </ul>
+                );
+              })}
+            </div>
 
-          {!showNextButton ? (
-            <button className="btn-primary" type="submit">
-              Submit Answer
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            {!showNextButton ? (
+              <Button type="submit" className="w-full h-14 text-lg bg-violet-600 hover:bg-violet-700">
+                Submit Answer
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                className="w-full h-14 text-lg bg-violet-600 hover:bg-violet-700"
+                onClick={handleNextQuestion}
               >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn-primary"
-              onClick={handleNextQuestion}
-            >
-              {questions.length === answeredQuestions
-                ? "View Final Results"
-                : "Next Question"}
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          )}
-        </form>
+                {questions.length === answeredQuestions ? "View Final Results" : "Next Question"}
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            )}
+          </form>
+        </div>
       </div>
     </div>
   );

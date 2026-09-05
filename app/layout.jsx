@@ -16,11 +16,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className={rubik.className}>
+    <html lang="en" className={`${geist.variable} font-sans`} suppressHydrationWarning>
+      <body className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 font-sans antialiased selection:bg-violet-100 selection:text-violet-900 dark:selection:bg-violet-900/50 dark:selection:text-violet-100 flex flex-col">
         <Providers>
           <Navbar />
-          <main>{children}</main>
+          <main className="flex-1">{children}</main>
           <Toaster position="bottom-right" />
         </Providers>
       </body>
